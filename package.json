@@ -1,0 +1,26 @@
+{
+  "name": "docu-mentor-ai",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react-dom": "^19.1.1",
+    "react-dropzone": "^14.3.8",
+    "@google/genai": "^1.14.0",
+    "react": "^19.1.1",
+    "i18next": "^23.13.0",
+    "react-i18next": "^15.0.0",
+    "i18next-http-backend": "^2.5.2",
+    "i18next-browser-languagedetector": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}

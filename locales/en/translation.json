@@ -1,0 +1,40 @@
+{
+  "header": {
+    "title": "Docu-Mentor",
+    "ai": "AI"
+  },
+  "app": {
+    "tagline": "Upload your Python script to automatically generate a professional README and add missing docstrings.",
+    "generateBtn": "Generate Documentation",
+    "generatingBtn": "Generating...",
+    "errorPrefix": "Oops!",
+    "errors": {
+      "fileRead": "Failed to read the file.",
+      "noFile": "Please upload a Python file first.",
+      "generation": "Error: {{message}}. Please check your API key and network connection."
+    }
+  },
+  "fileUpload": {
+    "fileSelected": "File Selected:",
+    "dragAndDrop": "Drag & drop a Python file here, or click to select",
+    "dropHere": "Drop the file here ...",
+    "acceptedFiles": "Only .py files are accepted"
+  },
+  "results": {
+    "title": "Generated Documentation",
+    "readmeTab": "README.md",
+    "codeTab": "Updated Code"
+  },
+  "codeBlock": {
+    "copy": "Copy",
+    "copied": "Copied!"
+  },
+  "loader": {
+    "analyzing": "Analyzing Python code structure...",
+    "consulting": "Consulting the AI mentor...",
+    "generatingReadme": "Generating a comprehensive README...",
+    "craftingDocstrings": "Crafting insightful docstrings...",
+    "assembling": "Assembling documentation...",
+    "finalizing": "Finalizing the report..."
+  }
+}

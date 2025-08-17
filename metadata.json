@@ -1,0 +1,5 @@
+{
+  "name": "Docu-Mentor AI",
+  "description": "An interactive web application that automatically generates comprehensive documentation (README, docstrings, architecture overview) for any user-uploaded Python code, leveraging AI to streamline the documentation process.",
+  "requestFramePermissions": []
+}
