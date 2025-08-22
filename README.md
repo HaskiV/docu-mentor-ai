@@ -48,3 +48,6 @@ npm install && echo "GEMINI_API_KEY=ВАШ_КЛЮЧ_GEMINI" > .env.local && npm 
 4. Получаем обновленный код (генерируется по-умолчанию, обновляется в случае нахождения ошибок)
 <img width="1886" height="979" alt="image" src="https://github.com/user-attachments/assets/f58f21e9-0d77-49ed-90c8-95b5e795f166" />
 
+## Лицензия
+
+MIT 
