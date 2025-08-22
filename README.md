@@ -2,7 +2,11 @@
 
 <img width="1912" height="654" alt="image" src="https://github.com/user-attachments/assets/e3f76f38-24a0-445e-b06e-7390118a88f8" />
 
-DocuMentor AI — это интерактивное веб-приложение для анализа кода ваших проектов на Python. Оно позволяет пользователям загружать файлы своих Python проектов и получать подробную документацию, оптимизированную под формат README.md. Документация учитывает описание проекта и изменения, которые были внесены в код. Также приложение предлагает многоязычную поддержку для удобства использования.
+DocuMentor AI — это интерактивное веб-приложение для анализа кода Python-скриптов и генерации README.md. Оно позволяет пользователям загружать Python-скрипты своих приложений и микросервисов и получать подробную документацию в формате README.md для GitHub.
+
+Документация учитывает описание сути проекта и изменения, которые были внесены в код.
+
+Также приложение предлагает многоязычную поддержку для удобства использования.
 
 ## ✨ Ключевые особенности
 
@@ -39,7 +43,8 @@ npm install && echo "GEMINI_API_KEY=ВАШ_КЛЮЧ_GEMINI" > .env.local && npm 
 <img width="1917" height="775" alt="image" src="https://github.com/user-attachments/assets/05d09c3a-d8b6-4de5-a729-1a248e629cc0" />
 
 3. Получаем документацию (на языке, который был выбран на момент нажатия "Сгенерировать документацию")
-<img width="1896" height="988" alt="image" src="https://github.com/user-attachments/assets/7a20f0ac-dcfe-468a-aa8d-f95a6b65ca54" />
+<img width="1882" height="940" alt="image" src="https://github.com/user-attachments/assets/f43428df-0406-410f-adbd-538e686ac53f" />
 
-4. Получаем обновленный код (генерируется после анализа)
-<img width="1886" height="976" alt="image" src="https://github.com/user-attachments/assets/61893274-41b1-462e-a414-622148ca0c8f" />
+4. Получаем обновленный код (генерируется по-умолчанию, обновляется в случае нахождения ошибок)
+<img width="1886" height="979" alt="image" src="https://github.com/user-attachments/assets/f58f21e9-0d77-49ed-90c8-95b5e795f166" />
+
