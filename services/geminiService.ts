@@ -1,4 +1,5 @@
 
+
 import { GoogleGenAI, Type } from "@google/genai";
 import type { DocuMentorResult, FunctionToDocument } from '../types';
 
@@ -9,13 +10,21 @@ if (!process.env.API_KEY) {
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const getReadmePrompt = (code: string, language: string): string => {
-  if (language === 'ru') {
+  if (language.startsWith('ru')) {
     return `
-      Вы — эксперт-разработчик на Python, которому поручено создание документации. На основе следующего кода Python сгенерируйте исчерпывающий файл README.md. README должен быть хорошо структурирован и содержать следующие разделы в формате Markdown на РУССКОМ ЯЗЫКЕ:
-      1.  **Обзор:** Краткий абзац, описывающий назначение скрипта.
-      2.  **Функциональность:** Маркированный список, описывающий ключевые возможности и то, что делает код.
-      3.  **Зависимости:** Список всех импортированных библиотек. Если внешних библиотек нет, укажите, что используются только стандартные библиотеки Python.
-      4.  **Пример использования:** Четкий пример того, как запустить скрипт или использовать его основные функции. Предположим, что пользователь сохранит код в файле с именем \`script.py\`.
+      Вы — Старший Технический Писатель и Евангелист Open Source. Ваша миссия — создать убедительный, понятный и профессиональный файл README.md для предоставленного Python-скрипта. Ваша цель — не просто задокументировать, а вдохновить разработчиков использовать этот инструмент.
+
+      Ваш ответ должен содержать ТОЛЬКО содержимое файла README.md в формате Markdown на РУССКОМ ЯЗЫКЕ. Не включайте никакого разговорного текста, вроде "Вот ваш README".
+
+      **Структура README.md:**
+
+      1.  **Название проекта и Слоган:** Придумайте привлекательное название и однострочный слоган, который отражает суть скрипта.
+      2.  **Обзор:** Напишите краткое описание в один абзац, объясняющее, что это за проект и какую проблему он решает. Цель — чтобы суть была понятна за 30 секунд.
+      3.  **Ключевые Возможности:** Маркированный список, выделяющий наиболее важные функции. Сосредоточьтесь на пользе для пользователя.
+      4.  **Зависимости:** Проанализируйте импорты в коде. Перечислите их. Если внешних зависимостей нет, укажите это.
+      5.  **Быстрый старт:** Предоставьте четкое, пошаговое руководство по запуску скрипта. Предположим, что пользователь сохранил код как \`script.py\`. Включите конкретный пример использования.
+
+      **Тон:** Профессиональный, ясный и немного восторженный. Язык должен быть доступен для разработчика среднего уровня.
 
       Вот код Python:
       \`\`\`python
@@ -26,11 +35,19 @@ const getReadmePrompt = (code: string, language: string): string => {
 
   // Fallback to English
   return `
-    You are an expert Python developer tasked with creating documentation. Based on the following Python code, generate a comprehensive README.md file. The README should be well-structured and include the following sections in Markdown format:
-    1.  **Summary:** A brief, one-paragraph overview of the script's purpose.
-    2.  **Functionality:** A bulleted list describing the key features and what the code does.
-    3.  **Dependencies:** A list of all imported libraries. If there are no external libraries, state that only standard Python libraries are used.
-    4.  **Usage Example:** A clear example of how to run the script or use its main functions. Assume the user will save the code in a file named \`script.py\`.
+    You are a Senior Technical Writer and Open Source Evangelist. Your mission is to create a compelling, clear, and professional README.md file for the provided Python script. The goal is not just to document, but to inspire developers to use this tool.
+
+    Your response must be ONLY the raw Markdown content for the README.md file. Do not include any conversational text like "Here is your README."
+
+    **README.md Structure:**
+
+    1.  **Project Title & Slogan:** Create an engaging title and a one-line slogan that captures the essence of the script.
+    2.  **Overview:** Write a concise, one-paragraph summary explaining what the project is and the problem it solves. Make it easy to understand in 30 seconds.
+    3.  **Key Features:** A bulleted list highlighting the most important capabilities. Focus on the benefits for the user.
+    4.  **Dependencies:** Analyze the imports in the code. List them. If there are no external dependencies, state that clearly.
+    5.  **Quick Start Guide:** Provide a clear, step-by-step guide on how to get the script running. Assume the user saves the code as \`script.py\`. Include a concrete usage example.
+
+    **Tone:** Professional, clear, and slightly enthusiastic. The language should be accessible to a mid-level developer.
 
     Here is the Python code:
     \`\`\`python
@@ -91,33 +108,23 @@ const findFunctionsWithoutDocstrings = async (code: string): Promise<FunctionToD
 };
 
 const getDocstringPrompt = (functionCode: string, language: string): string => {
-    if (language === 'ru') {
+    if (language.startsWith('ru')) {
         return `
-            Вы — эксперт-разработчик на Python, который пишет превосходную документацию.
-            Возьмите следующую функцию Python и добавьте к ней лаконичный докстринг в стиле Google на РУССКОМ ЯЗЫКЕ.
-            Докстринг должен объяснять назначение функции, ее аргументы (если есть) и что она возвращает (если что-то возвращает).
-            Верните ТОЛЬКО полный, обновленный код функции, включая новый докстринг. Не добавляйте никаких объяснений или окружающего текста.
+            Вы — педантичный Senior Python Разработчик, одержимый чистым, читаемым и идеально задокументированным кодом. Ваша задача — написать докстринг в стиле Google для предоставленной Python-функции.
 
-            Пример ввода:
-            def add(a, b):
-                return a + b
-            
-            Пример вывода:
-            \`\`\`python
-            def add(a, b):
-                """Складывает два числа вместе.
+            **Ваш Процесс (на РУССКОМ ЯЗЫКЕ):**
+            1.  **Глубокий Анализ:** Сначала проведите глубокий статический анализ кода функции. Поймите ее назначение, внутреннюю логику, параметры и возвращаемые значения.
+            2.  **Выявление Крайних Случаев:** Рассмотрите потенциальные ошибки или исключения, которые может вызвать функция.
+            3.  **Написание Докстринга:** На основе вашего анализа напишите исчерпывающий докстринг, соответствующий Google Python Style Guide. Он должен включать:
+                *   Краткое описание в одну строку.
+                *   Более детальное описание, если необходимо.
+                *   Секцию \`Args:\` для всех параметров, с указанием их типа и назначения.
+                *   Секцию \`Returns:\`, с указанием типа и значения возвращаемого результата.
+                *   Секцию \`Raises:\`, если функция явно вызывает исключения (например, \`ValueError\`).
 
-                Args:
-                    a (int): Первое число.
-                    b (int): Второе число.
+            **Ограничение:** Ваш ответ должен содержать ТОЛЬКО полный, обновленный Python-код функции, включая новый докстринг. НЕ оборачивайте его в Markdown-ограждения и не добавляйте никакого пояснительного текста.
 
-                Returns:
-                    int: Сумма двух чисел.
-                """
-                return a + b
-            \`\`\`
-
-            Теперь сгенерируйте докстринг для этой функции:
+            Теперь примените этот процесс к следующей функции:
             \`\`\`python
             ${functionCode}
             \`\`\`
@@ -126,31 +133,21 @@ const getDocstringPrompt = (functionCode: string, language: string): string => {
 
     // Fallback to English
     return `
-        You are an expert Python developer who writes excellent documentation.
-        Take the following Python function and add a concise, Google-style docstring to it.
-        The docstring should explain the function's purpose, its arguments (if any), and what it returns (if anything).
-        Return ONLY the complete, updated function code, including the new docstring. Do not add any explanations or surrounding text.
+        You are a meticulous Senior Python Developer with a passion for clean, readable, and perfectly documented code. Your task is to write a Google-style docstring for the given Python function.
 
-        Example input:
-        def add(a, b):
-            return a + b
-        
-        Example output:
-        \`\`\`python
-        def add(a, b):
-            """Adds two numbers together.
+        **Your Process:**
+        1.  **Deep Analysis:** First, perform a deep static analysis of the function's code. Understand its purpose, internal logic, parameters, and return values.
+        2.  **Identify Edge Cases:** Consider potential errors or exceptions the function might raise.
+        3.  **Write the Docstring:** Based on your analysis, write a comprehensive docstring that follows the Google Python Style Guide. It must include:
+            *   A concise one-line summary.
+            *   A more detailed description if necessary.
+            *   An \`Args:\` section for all parameters, detailing their type and purpose.
+            *   A \`Returns:\` section, detailing the type and meaning of the return value.
+            *   A \`Raises:\` section if the function explicitly raises exceptions (e.g., \`ValueError\`, \`TypeError\`).
 
-            Args:
-                a (int): The first number.
-                b (int): The second number.
+        **Constraint:** Your response must be ONLY the full, updated Python code for the function, including the new docstring. Do NOT wrap it in Markdown fences (like \`\`\`python) or add any explanatory text.
 
-            Returns:
-                int: The sum of the two numbers.
-            """
-            return a + b
-        \`\`\`
-
-        Now, generate the docstring for this function:
+        Now, apply this process to the following function:
         \`\`\`python
         ${functionCode}
         \`\`\`
@@ -181,8 +178,11 @@ export const analyzeCodeAndGenerateDocs = async (code: string, language: string)
   if (functionsToDocument.length > 0) {
       // Use a sequential loop to avoid race conditions and overlapping replacements
       for (const func of functionsToDocument) {
-          const newFunctionCode = await addDocstringToFunction(func.function_code, language);
-          updatedCode = updatedCode.replace(func.function_code, newFunctionCode);
+          // Ensure we are replacing a valid piece of code to avoid errors.
+          if(updatedCode.includes(func.function_code)) {
+            const newFunctionCode = await addDocstringToFunction(func.function_code, language);
+            updatedCode = updatedCode.replace(func.function_code, newFunctionCode);
+          }
       }
   }
 
